@@ -1,0 +1,28 @@
+<%- include('../../common/views/header.ejs')%> Product Details
+<div class="row mb-3">
+  <% for(let product of products) { %>
+  <div class="col-md-3 mb-3">
+    <div class="card" style="width: 18rem">
+      <img
+        src="/<%=product.imageUrl%>"
+        class="card-img-top"
+        alt="<%= product.name%>"
+        height="230"
+      />
+      <div class="card-body">
+        <h5 class="card-title"><%=product.name%></h5>
+        <h6 class="card-subtitle mb-3 text-muted">₹ <%=product.price%></h6>
+        <h6 class="card-subtitle mb-2 text-muted"><%=product.category%></h6>
+        <p class="card-text"><%=product.description%></p>
+        <a href="/product/edit?pid=<%=product.pid%>" class="btn btn-primary"
+          >Edit</a
+        >
+        <a href="#" class="btn btn-primary"
+          >Delete</a
+        >
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>
+<%- include('../../common/views/footer.ejs')%>

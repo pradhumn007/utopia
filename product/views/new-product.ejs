@@ -1,0 +1,25 @@
+<%- include('../../common/views/header.ejs')%> 
+<form action="/product/add" enctype="multipart/form-data" method="POST">
+  <div class="mb-3">
+    <label class="form-label" for="">Name</label>
+    <input class="form-control" type="text" name="name" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="">ImageUrl</label>
+    <input class="form-control" type="file" name="imageUrl" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="">Description</label>
+    <input class="form-control" type="text" name="description" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="">Category</label>
+    <input class="form-control" type="number" name="category" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="">Price</label>
+    <input class="form-control" type="number" name="price" />
+  </div>
+  <button class="btn btn-success" type="submit">Submit</button>
+</form>
+<%- include('../../common/views/footer.ejs')%>
