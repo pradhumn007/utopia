@@ -106,3 +106,5 @@ dist
 
 # Environment file
 .env
+
+flow.txt
