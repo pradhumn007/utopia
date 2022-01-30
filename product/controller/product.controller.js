@@ -19,26 +19,36 @@ exports.editProductById = async (req, res, next) => {
   });
 };
 
-exports.addProduct = async (req, res, next) => {
-  const { name, price, description, category } = req.body;
-  const { filename: imageUrl } = req.file;
-  console.log("controller ", req.body, req.file);
-  const productObj = new Product(name, imageUrl, price, description, category);
-  await ProductModel.create(productObj);
-  res.redirect("/product/list");
-};
-
 exports.updateProduct = async (req, res, next) => {
   const { name, price, description, category, pid } = req.body;
-  const { filename: imageUrl } = req.file ? req.file : {} ;
+  const { filename: imageUrl } = req.file ? req.file : {};
   await ProductModel.update(
-    { name, price, description, category, imageUrl },   
+    { name, price, description, category, imageUrl },
     {
       where: {
         pid: pid,
       },
     }
   );
+  res.redirect("/product/list");
+};
+
+exports.deleteProduct = async(req, res, next) => {
+  const {pid} = req.body;
+  await ProductModel.destroy({
+    where: {
+      pid: pid,
+    },
+  });
+  res.redirect("/product/list");
+};
+
+exports.addProduct = async (req, res, next) => {
+  const { name, price, description, category } = req.body;
+  const { filename: imageUrl } = req.file;
+  console.log("controller ", req.body, req.file);
+  const productObj = new Product(name, imageUrl, price, description, category);
+  await ProductModel.create(productObj);
   res.redirect("/product/list");
 };
 
