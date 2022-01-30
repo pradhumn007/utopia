@@ -22,5 +22,11 @@ exports.validateImageFieldOnAdd = (req, res, next) => {
 };
 
 exports.validateImageFieldOnEdit = (req, res, next) => {
-  next();
+  const requestFile = req.file;
+  const imageCheck = req.body.previousImage;
+  if (requestFile || imageCheck) {
+    next();
+  } else {
+    res.send("400 Bad Image field not available");
+  }
 };

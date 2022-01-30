@@ -1,25 +1,48 @@
-<%- include('../../common/views/header.ejs')%> 
+<%- include('../../common/views/header.ejs')%>
 <form action="/product/update" enctype="multipart/form-data" method="POST">
   <input type="hidden" name="pid" value="<%=product.pid%>" />
+  <input type="hidden" name="previousImage" value="<%=product.imageUrl%>" />
   <div class="mb-3">
     <label class="form-label" for="">Name </label>
-    <input class="form-control" type="text" name="name" value="<%=product.name%>" />
+    <input
+      class="form-control"
+      type="text"
+      name="name"
+      value="<%=product.name%>"
+    />
   </div>
   <div class="mb-3">
-    <label class="form-label" for="">ImageUrl</label>
+    <label class="form-label" for=""
+      ><img src="/<%=product.imageUrl%>" alt=""
+    /></label>
     <input class="form-control" type="file" name="imageUrl" />
   </div>
   <div class="mb-3">
     <label class="form-label" for="">Description</label>
-    <input class="form-control" type="text" name="description" value="<%=product.description%>" />
+    <input
+      class="form-control"
+      type="text"
+      name="description"
+      value="<%=product.description%>"
+    />
   </div>
   <div class="mb-3">
     <label class="form-label" for="">Category</label>
-    <input class="form-control" type="number" name="category" value="<%=product.category%>" />
+    <input
+      class="form-control"
+      type="number"
+      name="category"
+      value="<%=product.category%>"
+    />
   </div>
   <div class="mb-3">
     <label class="form-label" for="">Price</label>
-    <input class="form-control" type="number" name="price" value="<%=product.price%>" />
+    <input
+      class="form-control"
+      type="number"
+      name="price"
+      value="<%=product.price%>"
+    />
   </div>
   <button class="btn btn-success" type="submit">Update</button>
 </form>

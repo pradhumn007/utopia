@@ -30,8 +30,9 @@ exports.addProduct = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {
   const { name, price, description, category, pid } = req.body;
+  const { filename: imageUrl } = req.file ? req.file : {} ;
   await ProductModel.update(
-    { name, price, description, category },
+    { name, price, description, category, imageUrl },   
     {
       where: {
         pid: pid,
