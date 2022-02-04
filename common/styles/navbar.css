@@ -1,0 +1,45 @@
+.main-header{
+    background-color: var(--primary-color);
+}
+
+.inner-header{
+    padding: 1rem 0;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inner-header .logo {
+    max-width: 80px;
+}
+
+.inner-header .logo img{
+    max-width: 90%;
+}
+
+.inner-header .menu ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+} 
+
+.inner-header .menu li{
+    padding: 10px;
+    margin: 0 5px;
+}
+
+.inner-header .menu li a{
+    color: whitesmoke;
+}
+
+.inner-header .menu li .logSignBtn{
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+

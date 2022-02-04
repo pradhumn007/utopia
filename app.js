@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
 const multer = require("multer");
+const dirRoot = require("./common/utils/dirRoot.util");
 
 dotenv.config();
 const app = express();
@@ -12,7 +13,10 @@ const fileStrorage = multer.diskStorage({
     // console.log('destination 2',req.file, file);
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().toISOString().replace(/:/g, '-') + "-" + file.originalname);
+    cb(
+      null,
+      new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
+    );
     // console.log('filename ',req.file, file);
   },
 });
@@ -33,8 +37,9 @@ const filefilters = (req, file, cb) => {
 
 app.set("view-engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('product_images'));
-app.use(express.static('common_images'));
+app.use(express.static("product_images"));
+app.use(express.static("common_images"));
+app.use(express.static(path.join(dirRoot, "common", "styles")));
 app.use(
   multer({ storage: fileStrorage, fileFilter: filefilters }).single("imageUrl")
   // multer({dest: 'product_images'}).single('imageUrl')
