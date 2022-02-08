@@ -6,6 +6,7 @@ const {
   editProductById,
   updateProduct,
   deleteProduct,
+  wishlistProduct,
 } = require("./controller/product.controller");
 const {
   validateImageFieldOnAdd,
@@ -19,6 +20,8 @@ router.get("/new", showNewProductPage);
 router.get("/edit", editProductById);
 
 router.post('/delete', deleteProduct);
+
+router.post('/wishlist' , wishlistProduct);
 
 router.get("/list", getAllProducts);
 

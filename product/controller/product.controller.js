@@ -1,4 +1,5 @@
 const path = require("path");
+const { pid } = require("process");
 const dirRoot = require("../../common/utils/dirRoot.util");
 const Product = require("../models/product.model");
 const ProductModel = require("../schema/product.schema");
@@ -13,7 +14,6 @@ exports.showNewProductPage = async (req, res, next) => {
 exports.editProductById = async (req, res, next) => {
   const { pid } = req.query;
   const product = await ProductService.getProductById(pid);
-  console.log(product);
   res.render(path.join(dirRoot, "product", "views", "edit-product.ejs"), {
     product: product[0],
   });
@@ -23,7 +23,7 @@ exports.updateProduct = async (req, res, next) => {
   const { name, price, description, category, pid } = req.body;
   const { filename: imageUrl } = req.file ? req.file : {};
   await ProductModel.update(
-    { name, price, description, category, imageUrl },
+    { name: name, price, description, category, imageUrl },
     {
       where: {
         pid: pid,
@@ -33,8 +33,8 @@ exports.updateProduct = async (req, res, next) => {
   res.redirect("/product/list");
 };
 
-exports.deleteProduct = async(req, res, next) => {
-  const {pid} = req.body;
+exports.deleteProduct = async (req, res, next) => {
+  const { pid } = req.body;
   await ProductModel.destroy({
     where: {
       pid: pid,
@@ -43,10 +43,22 @@ exports.deleteProduct = async(req, res, next) => {
   res.redirect("/product/list");
 };
 
+exports.wishlistProduct = async (req, res, next) => {
+  const { pid, wishlist } = req.body;
+  await ProductModel.update(
+    { isWishlist: !wishlist },
+    {
+      where: {
+        pid: pid,
+      },
+    }
+  );
+  res.redirect("/product/list");
+};
+
 exports.addProduct = async (req, res, next) => {
   const { name, price, description, category } = req.body;
   const { filename: imageUrl } = req.file;
-  console.log("controller ", req.body, req.file);
   const productObj = new Product(name, imageUrl, price, description, category);
   await ProductModel.create(productObj);
   res.redirect("/product/list");
@@ -69,7 +81,6 @@ exports.getAllProducts = async (req, res, next) => {
 exports.getProductById = async (req, res, next) => {
   const { id } = req.query;
   const product = await ProductService.getProductById(id);
-  console.log(product);
   res.render(path.join(dirRoot, "product", "views", "product-list.ejs"), {
     products: product,
   });
