@@ -1,5 +1,4 @@
 const path = require("path");
-const { pid } = require("process");
 const dirRoot = require("../../common/utils/dirRoot.util");
 const Product = require("../models/product.model");
 const ProductModel = require("../schema/product.schema");
@@ -45,8 +44,9 @@ exports.deleteProduct = async (req, res, next) => {
 
 exports.wishlistProduct = async (req, res, next) => {
   const { pid, wishlist } = req.body;
+  const isWishlist = wishlist == 'false' ? true : false;
   await ProductModel.update(
-    { isWishlist: !wishlist },
+    { isWishlist },
     {
       where: {
         pid: pid,
@@ -65,12 +65,6 @@ exports.addProduct = async (req, res, next) => {
 };
 
 exports.getAllProducts = async (req, res, next) => {
-  const { id } = req.query;
-
-  if (id) {
-    this.getProductById(req, res, next);
-    return;
-  }
   let allProducts = await ProductModel.findAll({});
   allProducts = allProducts.map((product) => (product = product.dataValues));
   res.render(path.join(dirRoot, "product", "views", "product-list.ejs"), {
@@ -78,10 +72,4 @@ exports.getAllProducts = async (req, res, next) => {
   });
 };
 
-exports.getProductById = async (req, res, next) => {
-  const { id } = req.query;
-  const product = await ProductService.getProductById(id);
-  res.render(path.join(dirRoot, "product", "views", "product-list.ejs"), {
-    products: product,
-  });
-};
+

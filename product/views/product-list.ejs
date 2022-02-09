@@ -2,13 +2,13 @@
 <div class="row mb-3">
   <% for(let product of products) { %>
   <div class="col-md-3 mb-3">
-    <form  method="POST">
-      <div class="card <%= product.isWishlist ? 'wishlist' : '' %>" style="width: 18rem">
+    <form method="POST">
+      <div class="card" style="width: 18rem">
         <img
           src="/<%=product.imageUrl%>"
           class="card-img-top"
           alt="<%= product.name%>"
-          height="230"
+          height="250"
         />
         <div class="card-body">
           <h5 class="card-title"><%=product.name%></h5>

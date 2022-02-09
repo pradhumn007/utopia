@@ -13,6 +13,7 @@ const {
   validateImageFieldOnEdit,
   validateTextFields,
 } = require("./middleware/product.middleware");
+
 const router = express.Router();
 
 router.get("/new", showNewProductPage);
